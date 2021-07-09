@@ -33,12 +33,21 @@ public:
 		, m_length(1)
 	{}
 
+	void DisplayStats()
+	{
+		std::cout << "Head: " << m_pHead->GetData() << "\n";
+		std::cout << "Tail: " << m_pTail->GetData() << "\n";
+		std::cout << "Length: " << m_length << "\n";
+		PrintForward();
+	}
+
 	// Returns the count of how many nodes are in the Linked List.
 	const size_t& GetLength() const
 	{
 		return m_length;
 	}
 
+	// Displays out of scope if you search out of scope.
 	static void OutOfScope()
 	{
 		std::cout << "Out of Scope of Linked List.....\n";
@@ -103,16 +112,6 @@ public:
 		}
 	}
 
-	void GetHead()
-	{
-		std::cout << "Head: " << m_pHead->GetData() << "\n";
-	}
-
-	void GetTail()
-	{
-		std::cout << "Head: " << m_pTail->GetData() << "\n";
-	}
-
 	// Adds a new Node to the end of Linked List.
 	void Append(Node<DataType>* node)
 	{
@@ -129,7 +128,7 @@ public:
 	}
 
 	// Insert a new Node anywhere in the linked list by index.
-	void AddNode(Node<DataType>* node, int index)
+	void Insert(Node<DataType>* node, int index)
 	{
 		Node<DataType>* pPrevNode = m_pHead;
 		Node<DataType>* pCurrentNode = m_pHead;
@@ -138,8 +137,10 @@ public:
 		// Check case if the index is at 0.
 		if (index == 0)
 		{
-			node->SetNextNode(m_pHead);
+			pCurrentNode->SetPrevNode(node);
 			m_pHead = node;
+			m_pHead->SetNextNode(pCurrentNode);
+			++m_length;
 			return;
 		}
 
@@ -150,21 +151,16 @@ public:
 				pPrevNode->SetNextNode(node);
 				node->SetPrevNode(pPrevNode);
 				node->SetNextNode(pCurrentNode);
-				pCurrentNode->SetPrevNode(node);
+				if (pCurrentNode != nullptr)
+				{
+					pCurrentNode->SetPrevNode(node);
+				}
+				++m_length;
 				return;
 			}
 			pPrevNode = pCurrentNode;
 			pCurrentNode = pCurrentNode->GetNextNode();
 			++nodeIndex;
-		}
-
-		// Inserting at the end of the Linked list check.
-		if (index == m_length)
-		{
-			pPrevNode->SetNextNode(node);
-			node->SetPrevNode(pPrevNode);
-			++m_length;
-			return;
 		}
 		OutOfScope();
 	}

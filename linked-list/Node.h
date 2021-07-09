@@ -15,11 +15,6 @@ public:
 		, m_pNextNode(nullptr)
 	{}
 
-	Node(DataType data, Node<DataType>* pNextNode)
-		: m_data(data)
-		, m_pNextNode(pNextNode)
-	{}
-
 	// Returns the data inside of the Node.
 	const DataType& GetData() const
 	{
