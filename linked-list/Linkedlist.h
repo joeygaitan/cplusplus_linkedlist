@@ -9,6 +9,7 @@ class Linkedlist
 {
 private:
 	Node<DataType>* m_pHead;
+	Node<DataType>* m_pTail;
 	size_t m_length;
 public:
 	Linkedlist(std::vector<Node<DataType>*> nodes)
@@ -35,6 +36,12 @@ public:
 		return m_length;
 	}
 
+	static void OutOfScope()
+	{
+		std::cout << "Out of Scope of Linked List.....\n";
+		system("pause");
+	}
+
 	// Displays all the content of the linked list.
 	void PrintList()
 	{
@@ -50,7 +57,25 @@ public:
 		while (pNextNode != nullptr)
 		{
 			std::cout << "node number: " << nodeIndex << ": " << pNextNode->GetData() << "\n";
-			nodeIndex++;
+			++nodeIndex;
+			pNextNode = pNextNode->GetNextNode();
+		}
+	}
+
+	// Displays one Node from the linked list selected by index.
+	void PrintOne(int index)
+	{
+		Node<DataType>* pNextNode = m_pHead;
+		int nodeIndex = 0;
+
+		while (pNextNode != nullptr)
+		{
+			if (nodeIndex == index)
+			{
+				std::cout << "node number: " << nodeIndex << ": " << pNextNode->GetData() << "\n";
+				return;
+			}
+			++nodeIndex;
 			pNextNode = pNextNode->GetNextNode();
 		}
 	}
@@ -68,28 +93,70 @@ public:
 		++m_length;
 	}
 
+	// Insert a new Node anywhere in the linked list by index.
+	void AddNode(Node<DataType>* node, int index)
+	{
+		Node<DataType>* pPrevNode = m_pHead;
+		Node<DataType>* pCurrentNode = m_pHead;
+		int nodeIndex = 0;
+
+		// Check case if the index is at 0.
+		if (index == 0)
+		{
+			node->SetNextNode(m_pHead);
+			m_pHead = node;
+			return;
+		}
+
+		while (pCurrentNode != nullptr)
+		{
+			if (nodeIndex == index)
+			{
+				pPrevNode->SetNextNode(node);
+				node->SetNextNode(pCurrentNode);
+				return;
+			}
+			pPrevNode = pCurrentNode;
+			pCurrentNode = pCurrentNode->GetNextNode();
+			++nodeIndex;
+		}
+		OutOfScope();
+	}
+
 	// Removes a Node based on its location in the Linked List.
 	void RemoveNode(int index)
 	{
-		Node<DataType>* pPrevNode = nullptr;
+		Node<DataType>* pPrevNode = m_pHead;
 		Node<DataType>* pCurrentNode = m_pHead;
-		Node<DataType>* pNextNode = m_pHead->GetNextNode();
 		int nodeIndex = 0;
 
+		// Check case if the Linked List is empty.
+		if (m_pHead == nullptr)
+		{
+			std::cout << "Linked List is empty :(...\n";
+			return;
+		}
+
+		// Check case if the index is at 0.
 		if (index == 0)
 		{
-			// Will I still need to delete if I delete it somewhere else?
 			m_pHead = m_pHead->GetNextNode();
 			return;
 		}
-		while (currentNode != nullptr)
+
+		while (pCurrentNode != nullptr)
 		{
-			pPrevNode = pCurrentNode;
 			if (index == nodeIndex)
 			{
-				 
+				std::cout << "here \n";
+				pPrevNode->SetNextNode(pCurrentNode->GetNextNode());
+				return;
 			}
+			pPrevNode = pCurrentNode;
+			pCurrentNode = pCurrentNode->GetNextNode();
+			++nodeIndex;
 		}
+		OutOfScope();
 	}
 };
 

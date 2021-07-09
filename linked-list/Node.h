@@ -5,6 +5,7 @@ class Node
 {
 private:
 	DataType m_data;
+	Node* m_pPrevNode;
 	Node* m_pNextNode;
 public:
 	
@@ -44,10 +45,7 @@ public:
 	// Sets the Next Node to the new given Node.
 	void SetNextNode(Node* node)
 	{
-		if (m_pNextNode == nullptr)
-		{
 			m_pNextNode = node;
-		}
 	}
 };
 

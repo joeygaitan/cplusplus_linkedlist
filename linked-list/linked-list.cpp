@@ -5,7 +5,6 @@
 #include "Node.h"
 #include "Linkedlist.h"
 
-
 int main()
 {
     std::vector<Node<int>*> vectorNodes{ new Node<int>(5), new Node<int>(10), new Node<int>(15), new Node<int>(20) };
@@ -16,9 +15,9 @@ int main()
 
     std::cout << "\n\n";
 
-    Node<int>* newNode = new Node<int>(25);
+    Node<int>* pNewNode = new Node<int>(35);
 
-    list.Append(newNode);
+    list.AddNode(pNewNode,3);
 
     list.PrintList();
 
@@ -29,5 +28,5 @@ int main()
         delete node;
     }
 
-    delete newNode;
+    delete pNewNode;
 }

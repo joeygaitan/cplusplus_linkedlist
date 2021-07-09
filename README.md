@@ -2,7 +2,8 @@
 
 ## description
 * A linked list using templates that can be implemented using multiple types.
-* It can be initialized using a vector or a single node. 
+* It can be initialized using a vector or a single node.
+* This linked list starts at zero and ends at length - 1.
 
 ### Functions
 - **PrintList()** Displays the whole lists data
