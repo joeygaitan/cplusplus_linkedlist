@@ -23,24 +23,31 @@ public:
 		, m_pNextNode(pNextNode)
 	{}
 
+	// Returns the data inside of the Node.
 	const DataType& GetData() const
 	{
 		return m_data;
 	}
 
+	// Sets the Data of the Node.
 	void SetData(DataType data)
 	{
 		m_data = data;
 	}
 
+	// Returns the Next Node.
 	Node* GetNextNode()
 	{
 		return m_pNextNode;
 	}
 
+	// Sets the Next Node to the new given Node.
 	void SetNextNode(Node* node)
 	{
-		m_pNextNode = node;
+		if (m_pNextNode == nullptr)
+		{
+			m_pNextNode = node;
+		}
 	}
 };
 

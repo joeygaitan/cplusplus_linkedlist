@@ -29,11 +29,13 @@ public:
 		, m_length(1)
 	{}
 
+	// Returns the count of how many nodes are in the Linked List.
 	const size_t& GetLength() const
 	{
 		return m_length;
 	}
 
+	// Displays all the content of the linked list.
 	void PrintList()
 	{
 		Node<DataType>* pNextNode = m_pHead;
@@ -53,7 +55,8 @@ public:
 		}
 	}
 
-	void AddNode(Node<DataType>* node)
+	// Adds a new Node to the end of Linked List.
+	void Append(Node<DataType>* node)
 	{
 		Node<DataType>* pNextNode = m_pHead;
 
@@ -65,6 +68,7 @@ public:
 		++m_length;
 	}
 
+	// Removes a Node based on its location in the Linked List.
 	void RemoveNode(int index)
 	{
 		Node<DataType>* pPrevNode = nullptr;

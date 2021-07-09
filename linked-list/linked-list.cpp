@@ -18,9 +18,11 @@ int main()
 
     Node<int>* newNode = new Node<int>(25);
 
-    list.AddNode(newNode);
+    list.Append(newNode);
 
     list.PrintList();
+
+    
 
     for (Node<int>* node : vectorNodes)
     {
