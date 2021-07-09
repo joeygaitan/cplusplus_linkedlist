@@ -11,16 +11,25 @@ int main()
 
     Linkedlist<int> list(vectorNodes);
 
-    list.PrintList();
+    list.PrintBackward();
 
     std::cout << "\n\n";
 
-    Node<int>* pNewNode = new Node<int>(35);
+    //Node<int>* pNewNode = new Node<int>(35);
 
-    list.AddNode(pNewNode,3);
+    //list.AddNode(pNewNode,4);
 
-    list.PrintList();
+    //list.PrintBackward();
 
+    list.RemoveNode(2);
+
+    list.PrintBackward();
+
+    std::cout << "\n\n";
+
+    list.RemoveNode(2);
+
+    list.PrintBackward();
     
 
     for (Node<int>* node : vectorNodes)
@@ -28,5 +37,5 @@ int main()
         delete node;
     }
 
-    delete pNewNode;
+    /*delete pNewNode;*/
 }

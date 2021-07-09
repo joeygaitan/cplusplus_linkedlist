@@ -20,13 +20,16 @@ public:
 		for (size_t i = 1; i < nodes.size(); ++i)
 		{
 			pNextNode->SetNextNode(nodes[i]);
+			nodes[i]->SetPrevNode(pNextNode);
 			pNextNode = pNextNode->GetNextNode();
 			m_length++;
 		}
+		m_pTail = pNextNode;
 	}
 
 	Linkedlist(Node<DataType>* node)
 		: m_pHead(node)
+		, m_pTail(node)
 		, m_length(1)
 	{}
 
@@ -42,8 +45,8 @@ public:
 		system("pause");
 	}
 
-	// Displays all the content of the linked list.
-	void PrintList()
+	// Displays all the nodes of the Linked List from the head.
+	void PrintForward()
 	{
 		Node<DataType>* pNextNode = m_pHead;
 		int nodeIndex = 0;
@@ -59,6 +62,26 @@ public:
 			std::cout << "node number: " << nodeIndex << ": " << pNextNode->GetData() << "\n";
 			++nodeIndex;
 			pNextNode = pNextNode->GetNextNode();
+		}
+	}
+
+	// Display all the nodes from the tail.
+	void PrintBackward()
+	{
+		Node<DataType>* pNextNode = m_pTail;
+		int nodeIndex = m_length - 1;
+
+		if (m_length == 0)
+		{
+			std::cout << "Please add a node to display nodes....\n";
+			return;
+		}
+
+		while (pNextNode != nullptr)
+		{
+			std::cout << "node number: " << nodeIndex << ": " << pNextNode->GetData() << "\n";
+			--nodeIndex;
+			pNextNode = pNextNode->GetPrevNode();
 		}
 	}
 
@@ -80,6 +103,16 @@ public:
 		}
 	}
 
+	void GetHead()
+	{
+		std::cout << "Head: " << m_pHead->GetData() << "\n";
+	}
+
+	void GetTail()
+	{
+		std::cout << "Head: " << m_pTail->GetData() << "\n";
+	}
+
 	// Adds a new Node to the end of Linked List.
 	void Append(Node<DataType>* node)
 	{
@@ -90,6 +123,8 @@ public:
 			pNextNode = pNextNode->GetNextNode();
 		}
 		pNextNode->SetNextNode(node);
+		node->SetPrevNode(pNextNode);
+		m_pTail = node;
 		++m_length;
 	}
 
@@ -113,12 +148,23 @@ public:
 			if (nodeIndex == index)
 			{
 				pPrevNode->SetNextNode(node);
+				node->SetPrevNode(pPrevNode);
 				node->SetNextNode(pCurrentNode);
+				pCurrentNode->SetPrevNode(node);
 				return;
 			}
 			pPrevNode = pCurrentNode;
 			pCurrentNode = pCurrentNode->GetNextNode();
 			++nodeIndex;
+		}
+
+		// Inserting at the end of the Linked list check.
+		if (index == m_length)
+		{
+			pPrevNode->SetNextNode(node);
+			node->SetPrevNode(pPrevNode);
+			++m_length;
+			return;
 		}
 		OutOfScope();
 	}
@@ -141,6 +187,7 @@ public:
 		if (index == 0)
 		{
 			m_pHead = m_pHead->GetNextNode();
+			m_pHead->SetPrevNode(nullptr);
 			return;
 		}
 
@@ -148,8 +195,18 @@ public:
 		{
 			if (index == nodeIndex)
 			{
-				std::cout << "here \n";
 				pPrevNode->SetNextNode(pCurrentNode->GetNextNode());
+				// Checks if next node is not a nullptr. If it isn't then it will add it as a privous pointer.
+				if (pPrevNode->GetNextNode() != nullptr)
+				{
+					pPrevNode->GetNextNode()->SetPrevNode(pPrevNode);
+				}
+				// check to see if you are at the end, which then resets the tail to the new end.
+				if (index == m_length - 1)
+				{
+					m_pTail = pPrevNode;
+				}
+				--m_length;
 				return;
 			}
 			pPrevNode = pCurrentNode;

@@ -11,11 +11,7 @@ public:
 	
 	Node(DataType data)
 		: m_data(data)
-		, m_pNextNode(nullptr)
-	{}
-
-	Node()
-		: m_data()
+		, m_pPrevNode(nullptr)
 		, m_pNextNode(nullptr)
 	{}
 
@@ -36,16 +32,28 @@ public:
 		m_data = data;
 	}
 
+	// Get the Previous linked list.
+	Node* GetPrevNode()
+	{
+		return m_pPrevNode;
+	}
+
 	// Returns the Next Node.
 	Node* GetNextNode()
 	{
 		return m_pNextNode;
 	}
 
-	// Sets the Next Node to the new given Node.
-	void SetNextNode(Node* node)
+	// Set the previous node in the linked list.
+	void SetPrevNode(Node<DataType>* node)
 	{
-			m_pNextNode = node;
+		m_pPrevNode = node;
+	}
+
+	// Sets the Next Node to the new given Node.
+	void SetNextNode(Node<DataType>* node)
+	{
+		m_pNextNode = node;
 	}
 };
 
