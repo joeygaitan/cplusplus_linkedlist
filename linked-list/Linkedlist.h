@@ -1,33 +1,82 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "Node.h"
 
 
 template <typename DataType>
-class Linkedlist
+class LinkedList
 {
 private:
-	Node<DataType>* m_pHead;
-	Node<DataType>* m_pTail;
+	struct Node
+	{
+		DataType data;
+		Node* pPrevNode;
+		Node* pNextNode;
+	};
+
+	Node* m_pHead;
+	Node* m_pTail;
 	size_t m_length;
 public:
-	Linkedlist(std::vector<Node<DataType>*> nodes)
+
+	LinkedList()
+		: m_pHead(nullptr)
+		, m_pTail(nullptr)
+		, m_length(0)
+	{}
+
+	~LinkedList()
 	{
-		m_pHead = nodes[0];
-		Node<DataType>* pNextNode = m_pHead;
-		m_length++;
-		for (size_t i = 1; i < nodes.size(); ++i)
-		{
-			pNextNode->SetNextNode(nodes[i]);
-			nodes[i]->SetPrevNode(pNextNode);
-			pNextNode = pNextNode->GetNextNode();
-			m_length++;
-		}
-		m_pTail = pNextNode;
+		Destroy();
 	}
 
-	Linkedlist(Node<DataType>* node)
+	// Who ever is calling
+	//LinkedList(std::vector<Node<DataType>*> nodes)
+	//{
+	//	m_pHead = nodes[0];
+	//	Node<DataType>* pNextNode = m_pHead;
+	//	m_length = 1;
+	//	for (size_t i = 1; i < nodes.size(); ++i)
+	//	{
+	//		pNextNode->SetNextNode(nodes[i]);
+	//		nodes[i]->SetPrevNode(pNextNode);
+	//		pNextNode = pNextNode->GetNextNode();
+	//		m_length++;
+	//	}
+	//	m_pTail = pNextNode;
+	//}
+
+	LinkedList& operator=(LinkedList<DataType>&& right)
+		: LinkedList()
+	{
+		if (this == &right)
+			return *this;
+
+		Destroy();
+
+		for (Node* pNode = right.m_pHead; pNode != nullptr; pNode = pNode->pNextNode)
+		{
+			Append(pNode);
+		}
+	}
+
+	LinkedList& operator=(LinkedList<DataType>&& right)
+		: LinkedList()
+	{
+		if (this == &right)
+			return *this;
+
+		Destroy();
+
+		for (Node* pNode = right.m_pHead; pNode != nullptr; pNode = pNode->pNextNode)
+		{
+			Append(pNode);
+		}
+
+
+	}
+
+	LinkedList(Node* node)
 		: m_pHead(node)
 		, m_pTail(node)
 		, m_length(1)
@@ -39,6 +88,7 @@ public:
 		std::cout << "Tail: " << m_pTail->GetData() << "\n";
 		std::cout << "Length: " << m_length << "\n";
 		PrintForward();
+		std::cout << "\n\n" << "Display Backwards" << "\n";
 	}
 
 	// Returns the count of how many nodes are in the Linked List.
@@ -78,7 +128,8 @@ public:
 	void PrintBackward()
 	{
 		Node<DataType>* pNextNode = m_pTail;
-		int nodeIndex = m_length - 1;
+		// ptrdiff_t is exactly the same as size_t except it's signed.
+		ptrdiff_t nodeIndex = static_cast<ptrdiff_t>(m_length) - 1;
 
 		if (m_length == 0)
 		{
@@ -115,14 +166,14 @@ public:
 	// Adds a new Node to the end of Linked List.
 	void Append(Node<DataType>* node)
 	{
-		Node<DataType>* pNextNode = m_pHead;
+		Node<DataType>* pNext = m_pHead;
 
-		while (pNextNode->GetNextNode() != nullptr)
+		while (pNext->pNextNode != nullptr)
 		{
-			pNextNode = pNextNode->GetNextNode();
+			pNext = pNext->pNextNode;
 		}
-		pNextNode->SetNextNode(node);
-		node->SetPrevNode(pNextNode);
+		pNextNode = node;
+		node->pPrevNode = pNext;
 		m_pTail = node;
 		++m_length;
 	}
@@ -130,16 +181,16 @@ public:
 	// Insert a new Node anywhere in the linked list by index.
 	void Insert(Node<DataType>* node, int index)
 	{
-		Node<DataType>* pPrevNode = m_pHead;
+		Node<DataType>* pPrev = m_pHead;
 		Node<DataType>* pCurrentNode = m_pHead;
 		int nodeIndex = 0;
 
 		// Check case if the index is at 0.
 		if (index == 0)
 		{
-			pCurrentNode->SetPrevNode(node);
+			pCurrentNode->pPrevNode = node;
 			m_pHead = node;
-			m_pHead->SetNextNode(pCurrentNode);
+			m_pHead->pNextNode = pCurrentNode;
 			++m_length;
 			return;
 		}
@@ -148,7 +199,7 @@ public:
 		{
 			if (nodeIndex == index)
 			{
-				pPrevNode->SetNextNode(node);
+				pPrev->SetNextNode(node);
 				node->SetPrevNode(pPrevNode);
 				node->SetNextNode(pCurrentNode);
 				if (pCurrentNode != nullptr)
@@ -158,9 +209,14 @@ public:
 				++m_length;
 				return;
 			}
-			pPrevNode = pCurrentNode;
+			pPrev = pCurrentNode;
 			pCurrentNode = pCurrentNode->GetNextNode();
 			++nodeIndex;
+		}
+		if (index == m_length)
+		{
+			Append(node);
+			return;
 		}
 		OutOfScope();
 	}
@@ -210,6 +266,23 @@ public:
 			++nodeIndex;
 		}
 		OutOfScope();
+	}
+
+	void Destroy()
+	{
+		if (!m_pHead)
+			return;
+
+		Node* pCurrentNode = m_pHead;
+		Node* pNext = m_pHead->pNextNode;
+
+		while (pCurrentNode != nullptr)
+		{
+			delete pCurrentNode;
+			pCurrentNode = pNext;
+		}
+
+		m_pHead = m_pTail = nullptr;
 	}
 };
 

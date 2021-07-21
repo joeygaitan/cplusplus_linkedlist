@@ -3,12 +3,12 @@
 #include <iostream>
 #include <vector>
 #include "Node.h"
-#include "Linkedlist.h"
+#include "LinkedList.h"
 
 using pNodeType = Node<int>*;
 
 // Displays reversed list if false and from head to tail if true.
-void DisplayDirection(bool selection, Linkedlist<int>& list, const char* text)
+void DisplayDirection(bool selection, LinkedList<int>& list, const char* text)
 {
     if (selection)
     {
@@ -25,51 +25,51 @@ void DisplayDirection(bool selection, Linkedlist<int>& list, const char* text)
 }
 
 // Intializes the linked list with a vector. It then does some tests to show the changes made by different functions.
-void LinkedListVectorTest()
-{
-    std::vector<pNodeType> vectorNodes{ new Node<int>(5), new Node<int>(10), new Node<int>(15), new Node<int>(20) };
-
-    Linkedlist<int> list(vectorNodes);
-
-    // Print Intialized List.
-    DisplayDirection(true, list, "Intialized List from vector {*Node(5), *Node(10), *Node(15), *Node(20)}");
-
-    pNodeType pNewNodeHead = new Node<int>(35);
-
-    list.Insert(pNewNodeHead, 0);
-
-
-    // Print list with new head.
-    DisplayDirection(false, list, "Inserted Node(35) at the head (Displayed Backward)");
-
-    DisplayDirection(true, list, "Displayed Frontward");
-
-    list.RemoveNode(2);
-
-
-    // Prints out list with removed node.
-    DisplayDirection(false , list, "Removed the third element from the list (displayed backward)");
-    
-    list.RemoveNode(3);
-
-    // Prints list with removed tail.
-    DisplayDirection(true, list, "Removed the last Node of the list (displayed frontward)");
-
-    DisplayDirection(true, list, "(displayed backward)");
-
-
-    for (Node<int>* node : vectorNodes)
-    {
-        delete node;
-    }
-
-    delete pNewNodeHead;
-}
+//void LinkedListVectorTest()
+//{
+//    std::vector<pNodeType> vectorNodes{ new Node<int>(5), new Node<int>(10), new Node<int>(15), new Node<int>(20) };
+//
+//    LinkedList<int> list(vectorNodes);
+//
+//    // Print Intialized List.
+//    DisplayDirection(true, list, "Intialized List from vector {*Node(5), *Node(10), *Node(15), *Node(20)}");
+//
+//    pNodeType pNewNodeHead = new Node<int>(35);
+//
+//    list.Insert(pNewNodeHead, 0);
+//
+//
+//    // Print list with new head.
+//    DisplayDirection(false, list, "Inserted Node(35) at the head (Displayed Backward)");
+//
+//    DisplayDirection(true, list, "Displayed Frontward");
+//
+//    list.RemoveNode(2);
+//
+//
+//    // Prints out list with removed node.
+//    DisplayDirection(false , list, "Removed the third element from the list (displayed backward)");
+//    
+//    list.RemoveNode(3);
+//
+//    // Prints list with removed tail.
+//    DisplayDirection(true, list, "Removed the last Node of the list (displayed frontward)");
+//
+//    DisplayDirection(true, list, "(displayed backward)");
+//
+//
+//    for (Node<int>* node : vectorNodes)
+//    {
+//        delete node;
+//    }
+//
+//    delete pNewNodeHead;
+//}
 
 void SingleIntialNodeTest()
 {
     pNodeType head = new Node<int>(5);
-    Linkedlist<int> list(head);
+    LinkedList<int> list(head);
 
     pNodeType pNewNode = new Node<int>(10);
     list.Append(pNewNode);
@@ -103,7 +103,6 @@ void SelectTest()
     while (userChoice != 'q')
     {
         std::cout << "Linked List Testing\n";
-        std::cout << "1. Test Vector inserted Data\n";
         std::cout << "2. Test single Node inserted Data\n";
         std::cout << "q. Quit\n";
 
@@ -112,11 +111,6 @@ void SelectTest()
 
         switch (userChoice)
         {
-            case '1':
-                system("cls");
-                LinkedListVectorTest();
-                system("pause");
-                break;
             case '2':
                 system("cls");
                 SingleIntialNodeTest();

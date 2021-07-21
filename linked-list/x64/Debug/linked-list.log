@@ -1,0 +1,30 @@
+﻿  linked-list.cpp
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(50,1): error C2590: '=': only a constructor can have a base/member initializer list
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(289): message : see reference to class template instantiation 'LinkedList<DataType>' being compiled
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(49,14): error C2533: 'LinkedList<DataType>::LinkedList': constructors not allowed a return type
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(66,1): error C2590: '=': only a constructor can have a base/member initializer list
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(65,14): error C2533: 'LinkedList<DataType>::LinkedList': constructors not allowed a return type
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(169,18): error C2143: syntax error: missing ')' before '<'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(169,18): error C2143: syntax error: missing ';' before '<'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(169,18): error C2059: syntax error: '<'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(169,1): error C2059: syntax error: ')'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(170,1): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(184,18): error C2143: syntax error: missing ')' before '<'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(184,18): error C2143: syntax error: missing ';' before '<'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(184,18): error C2059: syntax error: '<'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(184,1): error C2059: syntax error: ')'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(185,1): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(112,7): error C2760: syntax error: unexpected token '<', expected 'declaration'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(132,7): error C2760: syntax error: unexpected token '<', expected 'declaration'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(153,7): error C2760: syntax error: unexpected token '<', expected 'declaration'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(229,7): error C2760: syntax error: unexpected token '<', expected 'declaration'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(49,14): error C2533: 'LinkedList<int>::LinkedList': constructors not allowed a return type
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(65,14): error C2533: 'LinkedList<int>::LinkedList': constructors not allowed a return type
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\linked-list.cpp(72,31): error C2664: 'LinkedList<int>::LinkedList(LinkedList<int>::Node *)': cannot convert argument 1 from 'pNodeType' to 'LinkedList<int>::Node *'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\linked-list.cpp(72,26): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(81,2): message : see declaration of 'LinkedList<int>::LinkedList'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\linked-list.cpp(75,25): error C2664: 'void LinkedList<int>::Append(LinkedList<int>::Node)': cannot convert argument 1 from 'pNodeType' to 'LinkedList<int>::Node'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\linked-list.cpp(75,25): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(169,7): message : see declaration of 'LinkedList<int>::Append'
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\linked-list.cpp(81,31): error C2660: 'LinkedList<int>::Insert': function does not take 2 arguments
+G:\wsl_ubuntu\C++ Notes\Data_Structures\cplusplus_linkedlist\linked-list\LinkedList.h(184,7): message : see declaration of 'LinkedList<int>::Insert'
